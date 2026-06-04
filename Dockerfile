@@ -2,12 +2,11 @@ FROM n8nio/n8n:latest
 
 USER root
 
-RUN apt-get update && apt-get install -y \
+RUN apk add --no-cache \
     python3 \
-    python3-pip \
-    python3-pillow \
-    && pip3 install reportlab --break-system-packages \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+    py3-pip \
+    && python3 -m pip install --upgrade pip setuptools \
+    && python3 -m pip install reportlab pillow \
+    && ln -sf python3 /usr/bin/python
 
 USER node
