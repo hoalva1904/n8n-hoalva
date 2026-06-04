@@ -1,12 +1,8 @@
-FROM n8nio/n8n:latest
+FROM n8nio/n8n:1.40.0
 
 USER root
 
-SHELL ["/bin/bash", "-c"]
-
-RUN apt-get update -y \
-    && apt-get install -y python3 python3-pip \
-    && pip3 install reportlab pillow \
-    && apt-get clean
+RUN apk add --no-cache python3 py3-pip \
+    && pip3 install reportlab pillow --break-system-packages
 
 USER node
