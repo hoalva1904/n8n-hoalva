@@ -1,13 +1,5 @@
 FROM n8nio/n8n:1.94.1
-
 USER root
-
-# Cài Python + thư viện
-RUN apk add --no-cache python3 py3-pip poppler-utils \
+RUN apk add --no-cache python3 py3-pip \
     && pip3 install reportlab pillow --break-system-packages
-
-# Copy Python script vào image — tránh nhúng vào n8n command
-COPY infographic_script.py /usr/local/bin/infographic_script.py
-RUN chmod +x /usr/local/bin/infographic_script.py
-
 USER node
